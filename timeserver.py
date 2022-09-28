@@ -1,5 +1,4 @@
 import socket
-from threading import Thread
 from datetime import datetime
 
 BUFFER = 1024
@@ -50,7 +49,7 @@ class Server:
 			self.clients.add(client)
 
 			print(f'Connected {address}')
-			dateTime = str(datetime.now())
+			dateTime = datetime.now().strftime("%d.%m.%Y %H:%M")
 			client.connection.send(dateTime.encode('UTF-8'))
 			self.close_client(client)
 
@@ -58,4 +57,4 @@ class Server:
 		self.clients.remove(client)
 		client.connection.close()
 
-server = Server('localhost', 1303)
+server = Server('0.0.0.0', 1303)
